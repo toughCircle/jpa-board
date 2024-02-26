@@ -11,7 +11,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 public class PostDto {
 
@@ -26,10 +25,10 @@ public class PostDto {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<CommentDto> comments;
 
-//    public PostDto(Long id, String title) {
-//        this.id = id;
-//        this.title = title;
-//    }
+    public PostDto(Long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
 
     public PostDto(Long id, String title,
                    String name,
@@ -42,12 +41,10 @@ public class PostDto {
 
     }
 
-
-
-//    public PostDto(String title, String postContent) {
-//        this.title = title;
-//        this.postContent = postContent;
-//    }
+    public PostDto(String title, String postContent) {
+        this.title = title;
+        this.postContent = postContent;
+    }
 
     public PostDto(Long id, String title,
                    String postContent, String name,

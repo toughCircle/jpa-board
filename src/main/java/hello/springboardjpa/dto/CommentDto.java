@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 public class CommentDto {
 
@@ -18,7 +17,7 @@ public class CommentDto {
     private LocalDateTime createDate;
     private LocalDateTime lastModifiedDate;
 
-//    public CommentDto(String commentContent) {
-//        this.commentContent = commentContent;
-//    }
+    public CommentDto(String commentContent) {
+        this.commentContent = commentContent;
+    }
 }
