@@ -47,6 +47,7 @@ public class PostController {
     @GetMapping
     public Page<PostDto> getPost(@RequestParam("page") int page, @RequestParam("size") int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdDate"));
+        System.out.println("pageable = " + pageable);
         return postService.getAllPosts(pageable);
     }
 

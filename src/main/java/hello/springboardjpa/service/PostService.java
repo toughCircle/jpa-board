@@ -62,7 +62,7 @@ public class PostService {
         });
 
         // 예외 처리: Post 객체가 존재하지 않는 경우, 예외를 발생시킬 수 있음
-        if (!postOptional.isPresent()) {
+        if (postOptional.isEmpty()) {
             throw new RuntimeException("Post not found with id " + id);
         }
     }
@@ -72,13 +72,15 @@ public class PostService {
         Post findPost = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Post not found"));
         findPost.setTitle(updateParam.getTitle());
         findPost.setPostContent(updateParam.getPostContent());
+        findPost.setStatus(Status.UPDATED);
         postRepository.save(findPost); // 이 시점에 lastModifiedDate 자동 업데이트
     }
 
     // 게시글 목록 조회 (응답에 본문내용 제외)
     public Page<PostDto> getAllPosts(Pageable pageable) {
         Page<Post> postPage = postRepository.findByIsDeletedFalse(pageable);
-        return postPage.map(post -> new PostDto(post.getId(), post.getTitle(), post.getStatus().name(), post.getCreatedDate(), post.getLastModifiedDate()));
+        return postPage.map(post -> new PostDto(post.getId(), post.getTitle(), post.getStatus().name(),
+            post.getCreatedDate(), post.getLastModifiedDate()));
     }
 
     // 게시글 단건 조회 (제목, 본문, 게시글에 등록된 댓글 포함)
